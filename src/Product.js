@@ -28,26 +28,26 @@ import React from "react";
 import "./styles/cart.css";
 
 const Product = props => {
-  var dict = {};
-  function addToCart(elem) {
-    //need the elem to be the productName
-    if (elem.limit == 0) {
-      alert("This item is out of stock!");
-      return;
-    }
-    if (dict[elem.productName] + 1 > elem.limit) {
-      alert("There are too many " + elem.productName + " in your cart!");
-      return;
-    }
-    if (elem.productName in dict) {
-      let n = dict[elem.productName];
-      n = n + 1;
-      dict[elem.productName] = n;
-    } else {
-      dict[elem.productName] = 1;
-    }
-    alert("There are " + dict[elem.productName] + " " + elem.productName + "s in your cart.");
-  }
+  // var dict = {};
+  // function addToCart(elem) {
+  //   //need the elem to be the productName
+  //   if (elem.limit == 0) {
+  //     alert("This item is out of stock!");
+  //     return;
+  //   }
+  //   if (dict[elem.productName] + 1 > elem.limit) {
+  //     alert("There are too many " + elem.productName + " in your cart!");
+  //     return;
+  //   }
+  //   if (elem.productName in dict) {
+  //     let n = dict[elem.productName];
+  //     n = n + 1;
+  //     dict[elem.productName] = n;
+  //   } else {
+  //     dict[elem.productName] = 1;
+  //   }
+  //   alert("There are " + dict[elem.productName] + " " + elem.productName + "s in your cart.");
+  // }
     return (
         // <div className="page-content">
         //     <h2>Add your products here!</h2>
@@ -57,12 +57,16 @@ const Product = props => {
             <div class="content">
               <div class="header">{props.productName}</div>
               <div class="description">
-                Price: ${props.price}
+                Price: ${props.price.toFixed(2)}
               </div>
             </div>
-            <div class="ui bottom attached button" onClick={() => addToCart(props)}>
+            <div class="ui bottom attached button" onClick={() =>props.onAddToCart(props.productName, props.price)}>
               <i class="add icon"></i>
               Add to Cart
+            </div>
+            <div class="ui bottom attached button" onClick={() =>props.onRemove(props.productName)}>
+              <i class="remove icon"></i>
+              Remove from Cart
             </div>
           </div>
         </div>
